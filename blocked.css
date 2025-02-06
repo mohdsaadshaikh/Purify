@@ -1,0 +1,119 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(135deg, #0f172a 0%, #581c87 50%, #0f172a 100%);
+  padding: 1rem;
+}
+
+.container {
+  position: relative;
+  max-width: 32rem;
+  width: 100%;
+}
+
+.card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 1rem;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.icon-container {
+  background: rgba(239, 68, 68, 0.1);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.description {
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.quote-container {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 2rem;
+}
+
+.quote {
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  font-style: italic;
+  font-size: 1.25rem;
+}
+
+.decoration {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(24px);
+  z-index: -1;
+}
+
+.decoration-1 {
+  width: 8rem;
+  height: 8rem;
+  background: rgba(147, 51, 234, 0.3);
+  top: -2.5rem;
+  left: -2.5rem;
+}
+
+.decoration-2 {
+  width: 7rem;
+  height: 7rem;
+  background: rgba(59, 130, 246, 0.3);
+  bottom: -2rem;
+  right: -2rem;
+}

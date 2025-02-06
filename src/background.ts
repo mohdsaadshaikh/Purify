@@ -17,8 +17,20 @@ chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
   );
 
   if (isBlocked) {
-    chrome.tabs.update(details.tabId, {
-      url: chrome.runtime.getURL("blocked.html"),
-    });
+    const isAdultSite = checkIfAdultSite(domain);
+    if (isAdultSite) {
+      chrome.tabs.update(details.tabId, {
+        url: chrome.runtime.getURL("blocked.html"),
+      });
+    } else {
+      chrome.tabs.update(details.tabId, {
+        url: chrome.runtime.getURL("defaultBlocked.html"),
+      });
+    }
   }
 });
+
+function checkIfAdultSite(domain: string) {
+  const adultSites = ["porn", "adult", "xxx", "xhamster"];
+  return adultSites.some((site) => domain.includes(site));
+}

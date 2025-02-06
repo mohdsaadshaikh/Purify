@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Trash2, Edit2, Check, X } from "lucide-react";
+import { DEFAULT_BLOCKED_URLS } from "../constants/defaultUrls";
 
 interface UrlListProps {
   urls: string[];
@@ -55,43 +56,46 @@ export const UrlList: React.FC<UrlListProps> = ({ urls, onRemove, onEdit }) => {
 
   return (
     <div className="space-y-2">
-      {urls.map((url) => (
-        <div
-          key={url}
-          className="flex items-center justify-between p-3 bg-gray-50 rounded-md"
-        >
-          {editingUrl === url ? (
-            <EditableUrl
-              url={url}
-              onSave={(newUrl) => {
-                onEdit(url, newUrl);
-                setEditingUrl(null);
-              }}
-              onCancel={() => setEditingUrl(null)}
-            />
-          ) : (
-            <>
-              <span className="text-gray-700">{url}</span>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => setEditingUrl(url)}
-                  className="text-blue-500 hover:text-blue-600"
-                >
-                  <Edit2 className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={() => onRemove(url)}
-                  className="text-red-500 hover:text-red-600"
-                >
-                  <Trash2 className="w-5 h-5" />
-                </button>
-              </div>
-            </>
-          )}
-        </div>
-      ))}
+      {urls
+        .filter((url) => !DEFAULT_BLOCKED_URLS.includes(url)) // Filter out URLs that are in DEFAULT_BLOCKED_URLS
+        .map((url) => (
+          <div
+            key={url}
+            className="flex items-center justify-between p-3 bg-gray-50 rounded-md"
+          >
+            {editingUrl === url ? (
+              <EditableUrl
+                url={url}
+                onSave={(newUrl) => {
+                  onEdit(url, newUrl);
+                  setEditingUrl(null);
+                }}
+                onCancel={() => setEditingUrl(null)}
+              />
+            ) : (
+              <>
+                <span className="text-gray-700">{url}</span>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setEditingUrl(url)}
+                    className="text-blue-500 hover:text-blue-600"
+                  >
+                    <Edit2 className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={() => onRemove(url)}
+                    className="text-red-500 hover:text-red-600"
+                  >
+                    <Trash2 className="w-5 h-5" />
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        ))}
 
-      {urls.length === 0 && (
+      {urls.filter((url) => !DEFAULT_BLOCKED_URLS.includes(url)).length ===
+        0 && (
         <p className="text-center text-gray-500 mt-4">
           No websites blocked yet. Add some above!
         </p>
