@@ -3,12 +3,7 @@
   "name": "Website Blocker",
   "version": "1.0",
   "description": "Block access to specified websites",
-  "permissions": [
-    "storage",
-    "webNavigation",
-    "webRequest",
-    "<all_urls>"
-  ],
+  "permissions": ["storage", "webNavigation", "webRequest"],
   "action": {
     "default_popup": "index.html"
   },

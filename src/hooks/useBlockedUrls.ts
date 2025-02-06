@@ -6,7 +6,7 @@ export const useBlockedUrls = () => {
   const [isExtension, setIsExtension] = useState(false);
 
   useEffect(() => {
-    const isInExtension = typeof chrome !== "undefined" && chrome.storage;
+    const isInExtension = typeof chrome !== "undefined" && !!chrome.storage;
     setIsExtension(isInExtension);
 
     if (isInExtension) {

@@ -28,12 +28,25 @@
         color: #4b5563;
         margin: 0;
       }
+      .quote {
+        font-size: 1.2rem;
+        color: #2d3748;
+        margin-top: 1rem;
+        font-weight: bold;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <h1>⛔️ Website Blocked</h1>
-      <p>This website ked by the Website Blocker extension.</p>
+      <p>This website was blocked by the Website Blocker extension.</p>
+      <div class="quote">
+        <script>
+          const urlParams = new URLSearchParams(window.location.search);
+          const quote = urlParams.get("quote");
+          document.write(decodeURIComponent(quote));
+        </script>
+      </div>
     </div>
   </body>
 </html>
