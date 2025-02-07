@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Website Blocker",
+  "name": "Purifyr",
   "version": "1.0",
-  "description": "Block access to specified websites",
+  "description": "Purify is a browser extension that blocks adult websites and distractions. Whenever a user tries to access harmful content, it displays motivational or religious quotes to encourage self-discipline and productivity.",
   "permissions": ["storage", "webNavigation", "webRequest"],
   "action": {
     "default_popup": "index.html"
