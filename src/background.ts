@@ -20,11 +20,11 @@ chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
     const isAdultSite = checkIfAdultSite(domain);
     if (isAdultSite) {
       chrome.tabs.update(details.tabId, {
-        url: chrome.runtime.getURL("blocked.html"),
+        url: chrome.runtime.getURL("blocked-pages/blocked.html"),
       });
     } else {
       chrome.tabs.update(details.tabId, {
-        url: chrome.runtime.getURL("defaultBlocked.html"),
+        url: chrome.runtime.getURL("blocked-pages/defaultBlocked.html"),
       });
     }
   }

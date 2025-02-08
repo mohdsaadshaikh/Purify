@@ -1,11 +1,21 @@
 {
   "manifest_version": 3,
-  "name": "Purifyr",
+  "name": "Purify",
   "version": "1.0",
   "description": "Purify is a browser extension that blocks adult websites and distractions. Whenever a user tries to access harmful content, it displays motivational or religious quotes to encourage self-discipline and productivity.",
   "permissions": ["storage", "webNavigation", "webRequest"],
+  "icons": {
+    "16": "assets/logo16.png",
+    "48": "assets/logo48.png",
+    "128": "assets/logo128.png"
+  },
   "action": {
-    "default_popup": "index.html"
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "assets/logo16.png",
+      "48": "assets/logo48.png",
+      "128": "assets/logo128.png"
+    }
   },
   "background": {
     "service_worker": "background.js",
