@@ -7,30 +7,31 @@ chrome.storage.sync.get(["blockedUrls"], (result) => {
 });
 
 chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
-  const { blockedUrls = [] } = await chrome.storage.sync.get(["blockedUrls"]);
+  const { blockedUrls = [] }: { blockedUrls: string[] } =
+    await chrome.storage.sync.get(["blockedUrls"]);
 
-  const url = new URL(details.url);
-  const domain = url.hostname;
+  const url: string = details.url;
 
-  const isBlocked = blockedUrls.some((blockedUrl: string) =>
-    domain.includes(blockedUrl.replace(/^https?:\/\//, ""))
-  );
+  const isBlocked = blockedUrls.some((blockedUrl: string) => {
+    const pattern = new RegExp(
+      `^${blockedUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`
+    );
+    return pattern.test(url);
+  });
 
   if (isBlocked) {
-    const isAdultSite = checkIfAdultSite(domain);
-    if (isAdultSite) {
-      chrome.tabs.update(details.tabId, {
-        url: chrome.runtime.getURL("blocked-pages/blocked.html"),
-      });
-    } else {
-      chrome.tabs.update(details.tabId, {
-        url: chrome.runtime.getURL("blocked-pages/defaultBlocked.html"),
-      });
-    }
+    const isAdultSite = checkIfAdultSite(url);
+    chrome.tabs.update(details.tabId, {
+      url: chrome.runtime.getURL(
+        isAdultSite
+          ? "blocked-pages/blocked.html"
+          : "blocked-pages/defaultBlocked.html"
+      ),
+    });
   }
 });
 
-function checkIfAdultSite(domain: string) {
+function checkIfAdultSite(url: string): boolean {
   const adultSites = ["porn", "adult", "xxx", "xhamster"];
-  return adultSites.some((site) => domain.includes(site));
+  return adultSites.some((site) => url.includes(site));
 }
